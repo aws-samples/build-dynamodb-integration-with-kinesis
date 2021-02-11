@@ -1,0 +1,2 @@
+order_id,item_id,customer_id,product,amount,currency,time_stamp,transaction_date
+3801,23,421,Mineral Water,2.00,USD,2020-09-02T03:54:12Z,2020-09-02
