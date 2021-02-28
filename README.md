@@ -31,9 +31,10 @@ Amazon Athena Hudi table definition file
 
 Order data file ( Initial Load  )
 
-**f. order_data_10_02_2020.csv **
+**f. order_data_10_02_2020.csv**
 
 Data file have updated record ( Change record)
+
 
 ## Security
 
