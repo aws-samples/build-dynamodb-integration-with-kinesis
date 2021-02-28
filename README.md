@@ -8,7 +8,7 @@ In this post, you use Kinesis Data Streams for DynamoDB and take advantage of ma
 
 ## Architecture
 
-![Architecture Diagram](./image/architecture.png)
+![Architecture Diagram](./image/architecture.PNG)
 
 
 **a. DDB.yaml**
