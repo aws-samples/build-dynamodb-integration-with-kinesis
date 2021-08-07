@@ -72,7 +72,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: us-west-1c
+      AvailabilityZone: us-west-1b
       CidrBlock: !Ref PublicSubnet2CIDR
       MapPublicIpOnLaunch: true
       Tags:
@@ -148,6 +148,12 @@ Resources:
    Type: AWS::S3::Bucket
    Properties:
      AccessControl: Private
+     BucketEncryption:
+        ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: 'AES256'
+     VersioningConfiguration:
+        Status: Enabled
 
   EmrInstanceRole:
     Type: "AWS::IAM::Role"
@@ -229,13 +235,34 @@ Resources:
 
   SourceS3Bucket:
     Type: 'AWS::S3::Bucket'
+    Properties:
+        BucketEncryption:
+            ServerSideEncryptionConfiguration:
+                - ServerSideEncryptionByDefault:
+                    SSEAlgorithm: 'AES256'
+        VersioningConfiguration:
+            Status: Enabled
       
   RawS3Bucket:
     Type: 'AWS::S3::Bucket'
+    Properties:
+        BucketEncryption:
+            ServerSideEncryptionConfiguration:
+                - ServerSideEncryptionByDefault:
+                    SSEAlgorithm: 'AES256'
+        VersioningConfiguration:
+            Status: Enabled    
 
   ProcessedS3Bucket:
     Type: 'AWS::S3::Bucket'
-
+    Properties:
+        BucketEncryption:
+            ServerSideEncryptionConfiguration:
+                - ServerSideEncryptionByDefault:
+                    SSEAlgorithm: 'AES256'
+        VersioningConfiguration:
+            Status: Enabled
+            
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties: 
@@ -258,6 +285,9 @@ Resources:
     Properties:
       Name: !Sub 'order-data-stream-${AWS::StackName}'
       ShardCount: 1
+      StreamEncryption:
+        EncryptionType: KMS
+        KeyId: alias/aws/kinesis
   Deliverystream: 
     DependsOn:
       - DeliveryPolicy
